@@ -7,6 +7,7 @@ class review:
     def __init__(self, db, id_=None, product_id=None, rating = None, user_id = None, comment = None ):
         self.db = db
 
+        # constructor overloading the pythonic way could have been done. 
         if id_ is None:
             if not isinstance(rating, (long, int)) and (rating > 5 or rating < 0) : 
                 raise Exception(notifs.errors['invalid_rating'])
@@ -30,6 +31,15 @@ class review:
     def __eq__(self, other):
         return self.id == other
 
+    def get_object(self):
+        return {
+            'id': self.id,
+            'pid': self.product.id,
+            'rating': self.rating,
+            'uid': self.user_id,
+            'comment': self.comment
+        }
+
     def get_review(self, id_):
         query = """SELECT * FROM review where id = ? """
 
@@ -42,11 +52,10 @@ class review:
 
     def set_review(self):
         query = """INSERT INTO review(pid, uid, rating, comment) VALUES (?,?,?,?)"""
-
         params = [self.product.id, self.user_id, self.rating, self.comment]
         review_id = self.db.insert(query, params)
         if (review_id is False):
             raise Exception(notifs.errors['invalid_review'])
         self.id = review_id
 
-# TODO: Implement update/delete if needed.
+# TODO: Implement update/delete if needed; not needed..

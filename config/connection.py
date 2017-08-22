@@ -31,3 +31,6 @@ class db_con:
 			return self.cur.fetchall()
 		else:
 			return False
+
+	def close_conn(self):
+		self.conn.close()
