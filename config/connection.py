@@ -12,9 +12,12 @@ class db_con:
 			self.conn.commit()
 			return True
 		except Exception as err: 
+			print(str(err))
 			return False
 	
 	def insert(self, query, params):
+		# print(query)
+		# print(params)
 		if self.execute(query, params):
 			return self.cur.lastrowid
 		else:
