@@ -15,7 +15,7 @@ A python Flask based API.
 | POST   | /review/	                                  | NO	 | pid, uid, rating, comment	| Add a new Review |
 | GET	   | /review/reviews/<p_id>/<date_from>/< date_to> | YES  | In URL	                    | All reviews for a product |
 | GET	   | /review/summary/<p_id>/<date_from>/<date_to>  | YES  | In URL                       | Summary for a product |
-| DELETE | /review/<id>                             | YES  | In URL	                    | Delete review |
+| DELETE | /review/<review_id>                             | YES  | In URL	                    | Delete review |
 
 
 For Authenticated end pointest, the username is username and password is password.
