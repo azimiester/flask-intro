@@ -16,8 +16,6 @@ class db_con:
 			return False
 	
 	def insert(self, query, params):
-		# print(query)
-		# print(params)
 		if self.execute(query, params):
 			return self.cur.lastrowid
 		else:

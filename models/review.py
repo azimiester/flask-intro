@@ -9,7 +9,7 @@ class review:
 
         # constructor overloading the pythonic way could have been done. 
         if id_ is None:
-            if not isinstance(rating, (long, int)) and (rating > 5 or rating < 0) : 
+            if not isinstance(rating, (long, int)) or not (rating <= 5 and rating >= 0) : 
                 raise Exception(notifs.errors['invalid_rating'])
             
             self.product = product(db, product_id)
@@ -49,6 +49,9 @@ class review:
         else:
             return rv.pop()
 
+    def delete_review(self, id_):
+        query = """DELETE FROM review where id = ? """
+        return self.db.update_delete(query, [id_])
 
     def set_review(self):
         query = """INSERT INTO review(pid, uid, rating, comment) VALUES (?,?,?,?)"""
