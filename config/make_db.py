@@ -1,14 +1,11 @@
-import sqlite3
+from connection import *
 
-#make connection
-conn = sqlite3.connect('python_flask.db')
-c = conn.cursor()
-
+db = db_con()
 #create products table
 create_product = """
 					CREATE TABLE IF NOT EXISTS  product(id INTEGER PRIMARY KEY, name TEXT NOT NULL)
 				 """
-c.execute(create_product)
+db.insert(create_product, ())
 
 
 #create reviews table
@@ -23,12 +20,14 @@ create_review = """
 						FOREIGN KEY(pid) REFERENCES product(id) 
 					)
 				"""
-c.execute(create_review)
+db.insert(create_review, ())
 
 #add products in table.
 products = [(815, 'Foobar-Soundsystem'), (1337, 'Soundblaster Pro')]
 add_product = """INSERT INTO product VALUES (?, ?) """
-c.executemany(add_product, products)
+
+for product in products:
+	db.insert(add_product, product)
 
 
 
